@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('App', [])
-        .controller('MainController', function ($scope, Service) {
+        .controller('MainController', function ($scope, $window, Service) {
             $scope.pop = pop
             $scope.push = push
 
@@ -18,6 +18,13 @@
                 Service.pop()
                     .then(function () {
                         init ()
+                    })
+                    .catch(function (err) {
+                        if (err.status === 400) {
+                            $window.location.reload()
+                            return
+                        }
+                        throw err
                     })
             }
 
@@ -43,6 +50,10 @@
                return $http.post('/api/pop')
             }
 
+            function push (number) {
+                return $http.post('/api/push', number)
+            }
+
             function show () {
                 return $http.get('/api/')
                     .then(function (res) {
@@ -53,9 +64,6 @@
                     })
             }
 
-            function push (number) {
-                return $http.post('/api/push', number)
-            }
             return {
                 pop: pop,
                 push: push,
