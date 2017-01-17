@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 
 /**
  * Created by chima on 1/13/17.
+ *
+ * This class implements a stack service,
+ * it does so by delegating to an instance oof java.util.Stack
  */
 
 @Component
@@ -18,17 +21,26 @@ public class StackService {
 
     private Stack<Integer> stack = new Stack();
 
+    /**
+     * Pushes integer to stack
+     * @param val
+     */
     public void push(int val) {
       stack.push(val);
     }
 
+    /**
+     * Removes last element in stack
+     */
     public void pop () throws StackEmptyException {
      if (stack.isEmpty()) {
          throw new StackEmptyException("Stack is empty");
      }
         stack.pop();
     }
-
+    /**
+     * @return list of numbers in the stack
+     */
     public List<Integer> show ()  {
         return stack.stream()
                 .map(p -> p.intValue())

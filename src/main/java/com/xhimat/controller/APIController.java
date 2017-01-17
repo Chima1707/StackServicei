@@ -16,16 +16,27 @@ public class APIController {
     @Autowired
     private StackService service;
 
+    /**
+     * handles show request
+     * @return
+     */
     @GetMapping("/")
     public List<Integer> showNumbers () {
         return service.show();
     }
 
+    /**
+     * handles push requests
+     * @param number
+     */
     @PostMapping("/push")
     public void pushNumber (@RequestBody Integer number) {
         service.push(number);
     }
 
+    /**
+     * handles pop request
+     */
     @PostMapping("/pop")
     public void popNumber () {
         service.pop();
