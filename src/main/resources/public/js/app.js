@@ -37,14 +37,14 @@
                 val = parseInt(val, 10)
 
                 Service.push(val)
-                    .then(function (data) {
+                    .then(function () {
                         init()
                     })
             }
 
             init()
         })
-        .factory('Service', function ($http, $q) {
+        .factory('Service', function ($http) {
 
             function pop() {
                return $http.post('/api/pop')
